@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # volumesの:右側のディレクトリもコンテナ内にできて、:左側の内容と同じものがある。
+    volumes:
+      - .:/react-todo-pwa-practice
+    # 下記commandがないとcompose up した時にreactが作動しない。
+    command: sh -c "cd react-todo-pwa-practice && npm start"
+    ports:
+      - "3000:3000"
+    stdin_open: true
