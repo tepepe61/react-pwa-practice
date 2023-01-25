@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/react-todo-pwa-practice
+    # 下記commandがないとcompose up した時にreactが作動しない。
+    command: sh -c "cd react-todo-pwa-practice && npm start"
+    ports:
+      - "3000:3000"
+    stdin_open: true
