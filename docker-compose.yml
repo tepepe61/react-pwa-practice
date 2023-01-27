@@ -1,6 +1,8 @@
 version: "3.9"
 services:
   react-app:
+    # env_fileで.envを指定すると、コンテナ内のnodeモードでprocess.envを参照できる
+    env_file: ./react-todo-pwa-practice/.env.local
     build:
       context: .
       dockerfile: Dockerfile
