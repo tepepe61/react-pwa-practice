@@ -11,3 +11,20 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
+
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+// グーグルログイン
+export const signInWithGoogle = () => {
+  firebase
+    .auth()
+    .signInWithPopup(googleProvider)
+    .then((result) => {
+      console.log(result.user);
+      console.log("signok!");
+    })
+    .catch((error) => {
+      console.log(error.message);
+      console.log("signng!");
+    });
+};
