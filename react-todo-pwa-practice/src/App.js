@@ -2,12 +2,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import "./service/firebase";
 import Header from "./components/Header";
+import { AuthProvider } from "./providers/AuthProvider";
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <Header />
-    </div>
+    </AuthProvider>
   );
 }
 

@@ -13,6 +13,7 @@ firebase.initializeApp({
 });
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const auth = firebase.auth();
 
 // グーグルログイン
 export const signInWithGoogle = () => {
@@ -20,11 +21,9 @@ export const signInWithGoogle = () => {
     .auth()
     .signInWithPopup(googleProvider)
     .then((result) => {
-      console.log(result.user);
       console.log("signok!");
     })
     .catch((error) => {
-      console.log(error.message);
       console.log("signng!");
     });
 };
