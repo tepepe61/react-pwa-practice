@@ -27,3 +27,17 @@ export const signInWithGoogle = () => {
       console.log("signng!");
     });
 };
+
+export const logOut = () => {
+  // 1. このthenとcatchの書き方Promiseチェーンというらしい
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("logoutok!");
+      document.location.reload();
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
