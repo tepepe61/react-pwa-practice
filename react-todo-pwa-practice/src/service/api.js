@@ -29,3 +29,15 @@ export const initGet = async (uid) => {
     return todos;
   });
 };
+
+export const todoDelete = (id) => {
+  db.collection("todo")
+    .doc(id)
+    .delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+    })
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+};
