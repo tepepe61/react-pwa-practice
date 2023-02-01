@@ -7,6 +7,19 @@ import * as Api from "../service/api";
 const Dashboard = () => {
   const currentUser = useContext(AuthContext);
   const [inputName, setInputName] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    fetch();
+    // 1. useEffectの第1引数に無名関数を定義することで、第2引数のcurrentUserのstateに変更があった場合一度だけ無名関数が発火する
+  }, [currentUser]);
+
+  const fetch = async () => {
+    if (dig(currentUser, "currentUser", "uid")) {
+      const data = await Api.initGet(currentUser.currentUser.uid);
+      await setTodos(data);
+    }
+  };
 
   const formRender = () => {
     if (dig(currentUser, "currentUser", "uid")) {
