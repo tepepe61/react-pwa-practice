@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { signInWithGoogle, logOut } from "../service/firebase";
 import { AuthContext } from "../providers/AuthProvider";
+import dig from "object-dig";
 
 const Header = () => {
   // 1. createContextがあるからuseContextがある。対の概念。
@@ -8,7 +9,7 @@ const Header = () => {
   const { currentUser } = useContext(AuthContext);
 
   const buttonRender = () => {
-    if (currentUser) {
+    if (dig(currentUser, "uid")) {
       return (
         <button type="button" onClick={logOut}>
           ログアウト
@@ -23,7 +24,7 @@ const Header = () => {
     }
   };
 
-  return <header>{buttonRender()}</header>;
+  return <header>へっだー{buttonRender()}</header>;
 };
 
 export default Header;
