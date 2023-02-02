@@ -27,6 +27,7 @@ export const signInWithGoogle = () => {
     })
     .catch((error) => {
       console.log("signng!");
+      console.log(error.message);
     });
 };
 
