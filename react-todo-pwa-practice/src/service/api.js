@@ -41,3 +41,20 @@ export const todoDelete = (id) => {
       console.error("Error removing document: ", error);
     });
 };
+
+export const toggleComplete = async (id) => {
+  let todo = await db.collection("todo").doc(id).get();
+
+  return db
+    .collection("todo")
+    .doc(id)
+    .update({
+      isComplete: todo.data().isComplete ? false : true,
+    })
+    .then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
+};
