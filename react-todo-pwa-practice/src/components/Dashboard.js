@@ -4,11 +4,34 @@ import { signInWithGoogle } from "../service/firebase";
 import dig from "object-dig";
 import * as Api from "../service/api";
 import ToDoList from "./ToDoList";
+import { TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { Button } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    textAlign: "space-between",
+    marginTop: 40,
+  },
+  form: {
+    width: "100%",
+    maxWidth: 360,
+    margin: "auto",
+    marginBottom: 40,
+    display: "flex",
+    alignItems: "baseline",
+    justifyContent: "center",
+  },
+  input: {
+    marginRight: 10,
+  },
+}));
 
 const Dashboard = () => {
   const currentUser = useContext(AuthContext);
   const [inputName, setInputName] = useState("");
   const [todos, setTodos] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     fetch();
@@ -25,22 +48,30 @@ const Dashboard = () => {
   const formRender = () => {
     if (dig(currentUser, "currentUser", "uid")) {
       return (
-        <form>
-          <input
+        <form className={classes.form}>
+          <TextField
             placeholder="ToDoName"
             value={inputName}
+            className={classes.input}
             onChange={(event) => setInputName(event.currentTarget.value)}
-          ></input>
-          <button type="button" onClick={() => post()}>
+          ></TextField>
+          <Button
+            variant="contained"
+            type="button"
+            color="primary"
+            size="small"
+            disabled={inputName.length > 0 ? false : true}
+            onClick={() => post()}
+          >
             追加
-          </button>
+          </Button>
         </form>
       );
     } else {
       return (
-        <button type="button" onClick={signInWithGoogle}>
+        <Button variant="inherit" type="button" onClick={signInWithGoogle}>
           ログイン
-        </button>
+        </Button>
       );
     }
   };
@@ -52,7 +83,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       {formRender()}
       <ToDoList todos={todos} fetch={fetch} />
     </div>
